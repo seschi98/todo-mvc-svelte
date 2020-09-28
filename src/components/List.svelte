@@ -54,13 +54,18 @@
               checked={todoItem.done}
               on:click={() => todos.toggleTodo(todoItem.id)} />
             <label
-              on:dblclick={() => (editingId = todoItem.id)}>{todoItem.text}</label>
+              on:dblclick={() => {
+                editingId = todoItem.id;
+                const input = document.querySelector(`[data-edit-todo="${todoItem.id}"]`);
+                setTimeout(() => input.focus(), 50);
+              }}>{todoItem.text}</label>
             <button
               class="destroy"
               on:click={() => todos.removeTodo(todoItem.id)} />
           </div>
           <input
             class="edit"
+            data-edit-todo={todoItem.id}
             value={todoItem.text}
             on:blur={() => {
               if (editingId === todoItem.id) {
