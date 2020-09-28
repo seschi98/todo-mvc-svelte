@@ -5,6 +5,21 @@
   export let filter = 'all';
   export let location;
 
+  const getFilterLinkProps = ({
+    location,
+    href,
+    isPartiallyCurrent,
+    isCurrent,
+  }) => {
+    const isActive = href === '/' ? isCurrent : isPartiallyCurrent || isCurrent;
+
+    // The object returned here is spread on the anchor element's attributes
+    if (isActive) {
+      return { class: 'selected' };
+    }
+    return {};
+  };
+
   $: editingId = -1;
   $: currentFilteredTodos = todos;
 
@@ -63,13 +78,13 @@
       left</span>
     <ul class="filters">
       <li>
-        <Link to="/">All</Link>
+        <Link to="/" getProps={getFilterLinkProps}>All</Link>
       </li>
       <li>
-        <Link to="/active">Active</Link>
+        <Link to="/active" getProps={getFilterLinkProps}>Active</Link>
       </li>
       <li>
-        <Link to="/completed">Completed</Link>
+        <Link to="/completed" getProps={getFilterLinkProps}>Completed</Link>
       </li>
     </ul>
     {#if $onlyCheckedTodos.length > 0}
