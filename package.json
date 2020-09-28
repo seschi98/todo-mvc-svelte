@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
+    "svelte-routing": "^1.4.2",
     "todomvc-app-css": "^2.3.0",
     "todomvc-common": "^1.0.5"
   }
